@@ -1,6 +1,7 @@
 package ai.auth.jwt.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,7 +18,6 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
  * Created by suman.das on 11/28/18.
  */
 @Configuration
-@EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
@@ -29,7 +29,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Autowired
     private UserDetailsService userDetailsService;
 
     @Autowired
@@ -47,17 +46,24 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         endpoints.tokenStore(tokenStore)
                 .reuseRefreshTokens(false)
                 .accessTokenConverter(accessTokenConverter)
-                .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService)
                 ;
 
 
     }
 
+    @Bean
+    public JwtAccessTokenConverter accessTokenConverter() {
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setSigningKey("MaYzkSkzPC57L");
+        return converter;
+    }
+
+
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-        oauthServer.tokenKeyAccess("hasAuthority('ROLE_TRUSTED_CLIENT')").checkTokenAccess("hasAuthority('ROLE_TRUSTED_CLIENT')");
+        oauthServer.tokenKeyAccess("hasAuthority('ROLE_TRUSTED_CLIENT')");
     }
 
 

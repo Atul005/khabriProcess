@@ -1,11 +1,10 @@
 package ai.auth.jwt.service.impl;
 
-import ai.auth.jwt.domain.RandomCity;
+import ai.auth.jwt.domain.MetroPolitanCity;
 import ai.auth.jwt.domain.User;
 import ai.auth.jwt.repository.RandomCityRepository;
 import ai.auth.jwt.repository.UserRepository;
 import ai.auth.jwt.service.GenericService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,10 +14,9 @@ import java.util.List;
  */
 @Service
 public class GenericServiceImpl implements GenericService {
-    @Autowired
+
     private UserRepository userRepository;
 
-    @Autowired
     private RandomCityRepository randomCityRepository;
 
     @Override
@@ -32,7 +30,15 @@ public class GenericServiceImpl implements GenericService {
     }
 
     @Override
-    public List<RandomCity> findAllRandomCities() {
-        return (List<RandomCity>)randomCityRepository.findAll();
+    public List<MetroPolitanCity> findAllRandomCities() {
+        return (List<MetroPolitanCity>)randomCityRepository.findAll();
+    }
+
+    @Override
+    public Boolean removeCity(String cityName) {
+        if(null != cityName){
+            throw new RuntimeException();
+        }
+        return false;
     }
 }

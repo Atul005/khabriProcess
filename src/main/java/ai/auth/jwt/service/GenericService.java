@@ -1,6 +1,6 @@
 package ai.auth.jwt.service;
 
-import ai.auth.jwt.domain.RandomCity;
+import ai.auth.jwt.domain.MetroPolitanCity;
 import ai.auth.jwt.domain.User;
 
 import java.util.List;
@@ -13,5 +13,7 @@ public interface GenericService {
 
     List<User> findAllUsers();
 
-    List<RandomCity> findAllRandomCities();
+    List<MetroPolitanCity> findAllRandomCities();
+
+    Boolean removeCity(String cityName);
 }

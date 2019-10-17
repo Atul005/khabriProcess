@@ -1,0 +1,2 @@
+Madhav has a small project which deals with Users favaourite cities. Madhav dont want any user to change city data of some other user, he wants to implements Oauth2 to protect its apis.
+He tried to implement oauth2 but failed to debug issues.He has table of City and User. Can you please him debugging the issues.
